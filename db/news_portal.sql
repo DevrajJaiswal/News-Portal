@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 02, 2025 at 07:37 PM
+-- Generation Time: Apr 02, 2025 at 08:10 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -89,7 +89,7 @@ CREATE TABLE `setting` (
 --
 
 INSERT INTO `setting` (`website_name`, `logo`, `footer_desc`) VALUES
-('News Portal', 'news.png', '© Copyright 2024 News Portal | Powered by');
+('Clone News Portal', 'news.png', '                                                                                                                                                                                                © Copyright 2024 News Portal | Powered by                      ');
 
 -- --------------------------------------------------------
 
