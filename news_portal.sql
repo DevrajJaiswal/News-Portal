@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 13, 2025 at 12:19 PM
+-- Generation Time: Apr 02, 2025 at 07:37 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -38,12 +38,13 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`category_id`, `category_name`, `post`) VALUES
-(30, 'Sports', 1),
+(30, 'Sports', 0),
 (31, 'Entertainment', 1),
 (32, 'Politics', 1),
-(42, 'Banking', 1),
-(41, 'Education', 1),
-(40, 'Technology', 3);
+(42, 'Banking', 0),
+(41, 'Education', 0),
+(40, 'Technology', 1),
+(43, 'Regional', 1);
 
 -- --------------------------------------------------------
 
@@ -66,14 +67,29 @@ CREATE TABLE `post` (
 --
 
 INSERT INTO `post` (`post_id`, `title`, `description`, `category`, `post_date`, `author`, `post_img`) VALUES
-(60, 'New Portal', '                                New PortalNew Portal.........................jununm uyhy uhbuyhu ybgybnh uybuh uyb             ', '41', '02 Jan, 2025', 48, '676d87bbba1fe-manmohan-singh-served-as-prime-minister-from-2004-to-2014-264333889-16x9.avif'),
-(54, 'Web Development', 'Log Files: As is true of most websites, we gather certain information automatically and store it in log files. This information includes IP addresses, browser type, Internet service provider (ISP), referring/exit pages, operating system, date/time stamp, and clickstream data. We use this information to maintain and improve the performance of the Services.', '40', '27 Dec, 2024', 45, 'Top-10-Web-Development-Companies-in-USA.jpeg'),
-(58, 'App Development', '                                lipsum.com is committed to protecting your privacy online. This Privacy Policy endeavours to describe to you our practices regarding the personal information we collect from users on our website, located at lipsum.com (the “Site”), and the services offered through the Site. If you have any questions about our Privacy Policy, our collection practices, the processing of user information, or if you would like to report a security violation to us directly, please contact us at help@lipsum.com                ', '40', '01 Jan, 2025', 48, 'Top-10-Web-Development-Companies-in-USA.jpeg'),
-(59, 'Cricket', '                                                                lipsum.com is committed to protecting your privacy online. This Privacy Policy endeavours to describe to you our practices regarding the personal information we collect from users on our website, located at lipsum.com (the “Site”), and the services offered through the Site. If you have any questions about our Privacy Policy, our collection practices, the processing of user information, or if you would like to report a security violation to us directly, please contact us at help@lipsum.com                                ', '30', '02 Jan, 2025', 48, 'Pushpa-2-The-Rule-Box-Office-Day-1.jpg'),
-(55, 'Bank Froad', 'Log Files: As is true of most websites, we gather certain information automatically and store it in log files. This information includes IP addresses, browser type, Internet service provider (ISP), referring/exit pages, operating system, date/time stamp, and clickstream data. We use this information to maintain and improve the performance of the Services.', '42', '27 Dec, 2024', 45, 'bank-fraud.jpg'),
-(56, 'Pushp-2 broke all the records of hit movies!', 'lipsum.com is committed to protecting your privacy online. This Privacy Policy endeavours to describe to you our practices regarding the personal information we collect from users on our website, located at lipsum.com (the “Site”), and the services offered through the Site. If you have any questions about our Privacy Policy, our collection practices, the processing of user information, or if you would like to report a security violation to us directly, please contact us at help@lipsum.com', '31', '27 Dec, 2024', 48, 'Pushpa-2-The-Rule-Box-Office-Day-1.jpg'),
-(61, 'test', '123', '40', '05 Jan, 2025', 45, 'bank-fraud.jpg'),
-(53, 'Dr. Manmohan singh Died', 'Dr. Manmohan Singh, the former Prime Minister of India, passed away. His legacy as one of the most prominent political figures in India\'s history is unparalleled. Serving as the country\'s Prime Minister from 2004 to 2014, Dr. Singh played a crucial role in shaping India\'s economic policies, particularly through economic reforms and liberalization that led to significant growth. His leadership and dedication to public service will be remembered by generations to come. His death marks the end of an era, leaving behind a profound impact on Indian politics and global diplomacy.', '32', '27 Dec, 2024', 45, '676d87bbba1fe-manmohan-singh-served-as-prime-minister-from-2004-to-2014-264333889-16x9.avif');
+(58, 'App Development', '                                                                lipsum.com is committed to protecting your privacy online. This Privacy Policy endeavours to describe to you our practices regarding the personal information we collect from users on our website, located at lipsum.com (the “Site”), and the services offered through the Site. If you have any questions about our Privacy Policy, our collection practices, the processing of user information, or if you would like to report a security violation to us directly, please contact us at help@lipsum.com                                ', '40', '01 Jan, 2025', 48, 'App Development.jpg'),
+(63, 'Pushpa 2', 'Pushpa 2: The Rule is a 2024 Indian Telugu-language action drama film[8] directed by Sukumar and produced by Mythri Movie Makers, in association with Sukumar Writings. The film stars Allu Arjun in the titular role, alongside Rashmika Mandanna, Fahadh Faasil, Jagapathi Babu, Sunil and Rao Ramesh. It is the second instalment of the Pushpa film series and the sequel to Pushpa: The Rise (2021). The film follows Pushpa Raj, a coolie risen to the ranks of sandalwood smuggler, who begins to face tough opposition from enemies, including SP Bhanwar Singh Shekhawat IPS.', '31', '01 Feb, 2025', 45, 'Pushpa-2-The-Rule-Box-Office-Day-1.jpg'),
+(62, 'Mahakumbh', 'Kumbh Mela v t e Prayagraj Haridwar Nashik Ujjain Kumbh Mela is an important Hindu pilgrimage, celebrated approximately every 6, 12 and 144 years, correlated with the partial or full revolution of Jupiter and representing the largest human gathering in the world. ', '43', '31 Jan, 2025', 45, 'mahakumbh.webp'),
+(53, 'Dr. Manmohan singh Died', 'Dr. Manmohan Singh, the former Prime Minister of India, passed away. His legacy as one of the most prominent political figures in India\'s history is unparalleled. Serving as the country\'s Prime Minister from 2004 to 2014, Dr. Singh played a crucial role in shaping India\'s economic policies, particularly through economic reforms and liberalization that led to significant growth. His leadership and dedication to public service will be remembered by generations to come. His death marks the end of an era, leaving behind a profound impact on Indian politics and global diplomacy.', '32', '27 Dec, 2024', 45, 'Manmohan Singh.avif');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `setting`
+--
+
+CREATE TABLE `setting` (
+  `website_name` varchar(60) NOT NULL,
+  `logo` varchar(50) NOT NULL,
+  `footer_desc` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `setting`
+--
+
+INSERT INTO `setting` (`website_name`, `logo`, `footer_desc`) VALUES
+('News Portal', 'news.png', '© Copyright 2024 News Portal | Powered by');
 
 -- --------------------------------------------------------
 
@@ -130,13 +146,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `user`
