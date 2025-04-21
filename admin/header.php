@@ -1,6 +1,8 @@
 <?php include "config.php";
 
 $url=$_SERVER['PHP_SELF'];
+// echo $url;
+
 $base_url=basename($url);
 // echo $base_url;
 switch ($base_url) {
@@ -57,15 +59,17 @@ $row=mysqli_fetch_array($result);
                     <a href="post.php"><img class="logo" src="images/<?php echo $row['logo']; ?>"></a>
                 </div>
                 <!-- /LOGO -->
-                <!-- LOGO-Out -->
+
+                <!-- LOG-Out -->
                 <div class="col-md-offset-6  col-md-3 text-right">
                     <a href="logout.php" class="admin-logout">Hlo! <?php echo $_SESSION['firstname'] /* . " " . $_SESSION['lastname']; */ ?>, logout</a>
                 </div>
-                <!-- /LOGO-Out -->
+                <!-- /LOG-Out -->
             </div>
         </div>
     </div>
     <!-- /HEADER -->
+
     <!-- Menu Bar -->
     <div id="admin-menubar">
         <div class="container">
@@ -77,7 +81,6 @@ $row=mysqli_fetch_array($result);
                         </li>
                         <?php
                         if ($_SESSION['role'] == 1) {
-
                         ?>
                             <li>
                                 <a href="category.php">Category</a>

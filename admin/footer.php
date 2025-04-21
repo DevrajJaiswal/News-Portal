@@ -17,6 +17,14 @@ $row = mysqli_fetch_array($result);
 <!-- /Footer -->
 </body>
 
+<script src="../js/jquery.js"></script>
+<script src="../js/login.js"></script>
+<script src="../js/user.js"></script>
+<script src="../js/post.js"></script>
+<script src="../js/category.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/script.js"></script>
+
 </html>
 
 <!-- style="width:100%; position: fixed; bottom:0; left:0; margin-top:30px" -->

@@ -19,7 +19,7 @@
                     <img class="logo" src="images/news.png">
                     <h3 class="heading">Admin</h3>
                     <!-- Form Start -->
-                    <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
+                    <form action="" id="logInForm">
                         <div class="form-group">
                             <label>Username</label>
                             <input type="text" name="username" class="form-control" placeholder="" required>
@@ -28,11 +28,11 @@
                             <label>Password</label>
                             <input type="password" name="password" class="form-control" placeholder="" required>
                         </div>
-                        <input type="submit" name="login" class="btn btn-primary" value="login" />
+                        <input type="button" name="login" id="logInButton" class="btn btn-primary" value="login" />
                     </form>
                     <!-- /Form  End -->
-                    <?php include "config.php"; ?>
                     <?php
+/*                     include "config.php";
 
                     if (isset($_POST['login'])) {
                         $username = mysqli_real_escape_string($conn, $_POST['username']);
@@ -55,7 +55,7 @@
                         } else {
                             echo "<div class='alert alert-danger'> Username or Password wrong!</div>";
                         }
-                    }
+                    } */
                     ?>
 
                 </div>
