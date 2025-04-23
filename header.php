@@ -49,7 +49,9 @@ $row=mysqli_fetch_array($result);
             </div>
         </div>
     </div>
+
     <!-- /HEADER end-->
+
     <!-- Menu Bar -->
     <div id="menu-bar">
         <div class="container">
