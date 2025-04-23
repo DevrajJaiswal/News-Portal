@@ -1,21 +1,40 @@
 <?php include "config.php";
 
-$url=$_SERVER['PHP_SELF'];
+$url = $_SERVER['PHP_SELF'];
 // echo $url;
 
-$base_url=basename($url);
+$base_url = basename($url);
 // echo $base_url;
 switch ($base_url) {
-case "post.php": $title="Post"; break;
-case "category.php": $title= "Category"; break;
-case "setting.php": $title= "Setting"; break;
-case "add-post.php": $title= "Add Post"; break;
-case "update-post.php": $title= "Update Post"; break;
-case "add-user.php": $title= "Add User"; break;
-case "update-user.php": $title= "Update User"; break;
-case "add-category.php": $title= "Add Category"; break;
-case "update-category.php": $title= "Update Category"; break;
-default: $title= "Users";
+    case "post.php":
+        $title = "Post";
+        break;
+    case "category.php":
+        $title = "Category";
+        break;
+    case "setting.php":
+        $title = "Setting";
+        break;
+    case "add-post.php":
+        $title = "Add Post";
+        break;
+    case "update-post.php":
+        $title = "Update Post";
+        break;
+    case "add-user.php":
+        $title = "Add User";
+        break;
+    case "update-user.php":
+        $title = "Update User";
+        break;
+    case "add-category.php":
+        $title = "Add Category";
+        break;
+    case "update-category.php":
+        $title = "Update Category";
+        break;
+    default:
+        $title = "Users";
 }
 
 session_start();
@@ -25,8 +44,8 @@ if (!isset($_SESSION['username'])) {
 }
 
 $sql = "select * from setting";
-$result=mysqli_query($conn,$sql);
-$row=mysqli_fetch_array($result);
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_array($result);
 ?>
 
 <!DOCTYPE html>
@@ -37,8 +56,8 @@ $row=mysqli_fetch_array($result);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-     <link rel="shortcut icon" href="images/<?php  ?>" type="image/x-icon">
-    <title><?php echo $title ." - Admin Panel"; ?></title>
+    <link rel="shortcut icon" href="images/<?php ?>" type="image/x-icon">
+    <title><?php echo $title . " - Admin Panel"; ?></title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="../css/bootstrap.min.css" />
     <!-- Font Awesome Icon -->
@@ -62,7 +81,7 @@ $row=mysqli_fetch_array($result);
 
                 <!-- LOG-Out -->
                 <div class="col-md-offset-6  col-md-3 text-right">
-                    <a href="logout.php" class="admin-logout">Hlo! <?php echo $_SESSION['firstname'] /* . " " . $_SESSION['lastname']; */ ?>, logout</a>
+                    <span class="admin-logout">Hlo! <?php echo $_SESSION['firstname'] ?>, logout</span>
                 </div>
                 <!-- /LOG-Out -->
             </div>
@@ -81,7 +100,7 @@ $row=mysqli_fetch_array($result);
                         </li>
                         <?php
                         if ($_SESSION['role'] == 1) {
-                        ?>
+                            ?>
                             <li>
                                 <a href="category.php">Category</a>
                             </li>
@@ -91,7 +110,7 @@ $row=mysqli_fetch_array($result);
                             <li>
                                 <a href="setting.php">Setting</a>
                             </li>
-                        <?php
+                            <?php
                         }
                         ?>
                     </ul>

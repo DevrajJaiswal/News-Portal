@@ -1,2 +1,5 @@
-console.log("User");
+
+function loadUsers(){
+    
+}
 
