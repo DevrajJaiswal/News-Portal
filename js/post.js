@@ -1,1 +1,4 @@
-console.log("Post");
+$(document).ready(function () {
+    console.log("Post");
+
+})

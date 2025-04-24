@@ -1,1 +1,4 @@
-console.log("Category");
+$(document).ready(function () {
+    console.log("Category");
+
+})

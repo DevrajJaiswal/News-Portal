@@ -1,1 +1,3 @@
-console.log("Search");
+$(document).ready(function () {
+    console.log("Search");
+})

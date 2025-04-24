@@ -158,8 +158,9 @@ img.logo{
 #admin-content .admin-pagination{
     margin: 0;
 }
-#admin-content .admin-pagination li a{
+#admin-content .admin-pagination li span{
     display: block;
+    cursor: pointer !important;
 }
 
 .id,
