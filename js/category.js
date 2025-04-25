@@ -1,4 +1,4 @@
 $(document).ready(function () {
-    console.log("Category");
+    // console.log("Category");
 
 })

@@ -1,3 +1,3 @@
 $(document).ready(function () {
-    console.log("Search");
+    // console.log("Search");
 })

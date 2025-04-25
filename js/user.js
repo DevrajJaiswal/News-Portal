@@ -89,10 +89,115 @@ $(document).ready(function () {
     // Fetch Users code end 
 
 
+    // Navigate page code start 
     $(document).on('click', ".navigate span", (function () {
         let pageNo = $(this).data("page");
         loadUsers(pageNo);
     }))
+    // Navigate page code end 
+
+
+    // Add user code start 
+    $(".add-new").click(function () {
+        // console.log("Model form visible")
+        $("#modelForm").show()
+    })
+
+    $("#closeModelForm").click(function () {
+        // console.log("Model form hide")
+        $("#modelForm").hide()
+    })
+
+    function formValidation() {
+        console.clear()
+        error = [];
+        isValidated = true;
+        userInfo = {}
+
+        fName = $("#fname").val().trim()
+        console.log(fName)
+        if (fName === '') {
+            error.push("First Name is blank");
+            isValidated = false;
+        } else {
+            userInfo.fName = fName;
+        }
+
+        lName = $("#lname").val().trim()
+        console.log(lName)
+        if (lName === '') {
+            error.push("Last Name is blank");
+            isValidated = false;
+        } else {
+            userInfo.lName = lName;
+        }
+
+        userName = $("#user").val().trim()
+        console.log(userName)
+        if (userName === '') {
+            error.push("User Name is blank");
+            isValidated = false;
+        } else {
+            userInfo.userName = userName;
+        }
+
+        password = $("#password").val().trim()
+        console.log(password)
+        if (password == '') {
+            error.push("Password is blank");
+            isValidated = false;
+        } else {
+            userInfo.password = password;
+        }
+
+        role = parseInt($("#role").val().trim())
+        console.log(role)
+        console.log(typeof (role))
+        if (role === '') {
+            error.push("Role is blank");
+            isValidated = false;
+        } else {
+            userInfo.role = role;
+        }
+        return isValidated;
+    }
+
+    $("#saveButton").click(function (e) {
+        e.preventDefault()
+        console.log("Save Button clicked")
+
+        if (formValidation()) {
+            $.ajax({
+                "url": "http://localhost/News_Portal/api/user.php",
+                "type": "POST",
+                "data": JSON.stringify({
+                    action: "add_user", userInfo: userInfo
+                }),
+                "contentType": "application/json",
+                "dataType": "json",
+                "success": function (res) {
+                    // console.log(res)
+                    if (res.status === 200) {
+                        console.log(res["added user"])
+
+                        $("#userForm")[0].reset();
+                        $("#modelForm").hide()
+                        loadUsers();
+                    } else {
+                        console.log(res.message)
+                    }
+                },
+                "error": function (error) {
+                    console.log(error);
+                }
+            })
+            console.log(isValidated)
+        } else {
+            alert("All fields are required!");
+            console.log(error);
+        }
+    })
+    // Add user code end 
 
 
     // Delete user code start 
