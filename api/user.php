@@ -43,9 +43,8 @@ if (!isset($data["action"]) || empty($data["action"])) {
                 $result = mysqli_query($conn, $sql1) or die('query failed');
 
                 if (mysqli_num_rows($result) > 0) {
-                    // echo "<p class='danger'>User name already Exist</p>";
                     echo json_encode([
-                        "status" => 201,
+                        "status" => 409,
                         "message" => "User name already Exist!"
                     ]);
                 } else {
@@ -56,7 +55,7 @@ if (!isset($data["action"]) || empty($data["action"])) {
                         echo json_encode([
                             "status" => 201,
                             "added user" => $data['userInfo'],
-                            "message" => "User  Successfully!"
+                            "message" => "User added Successfully!"
                         ]);
                     } else {
                         echo json_encode([
@@ -72,14 +71,97 @@ if (!isset($data["action"]) || empty($data["action"])) {
                 ]);
             }
             break;
+        case "edit_user":// Edit User start
+            if (!isset($data["userId"]) || empty($data["userId"])) {
+                echo json_encode([
+                    "status" => 404,
+                    "message" => "User ID is required!"
+                ]);
+                exit;
+            }
 
-        case "update_user":
-            echo json_encode([
-                "status" => 200,
-                "message" => "User Updated Successfully!"
-            ]);
+            $user_id = $data["userId"];
+
+            $sql = "select user_id, first_name, last_name, username, role from user where user_id={$user_id}";
+
+            $result = mysqli_query($conn, $sql);
+
+            if (mysqli_num_rows($result) > 0) {
+                while ($user = mysqli_fetch_assoc($result)) {
+                    echo json_encode([
+                        "status" => 200,
+                        "user" => $user,
+                        "message" => "User Fetched Successfully in form"
+                    ]);
+                }
+            } else {
+                echo json_encode([
+                    "status" => 404,
+                    "message" => "No User found associated with ID no. {$user_id}"
+                ]);
+            }
+            // Edit User end
             break;
-        case "delete_user":// Delete Users start
+        case "update_user":
+
+            if (isset($data['userInfo']) && !empty($data['userInfo'])) {
+
+                if (!is_array($data['userInfo'])) {
+                    echo json_encode([
+                        "status" => 400,
+                        "message" => "Invalid format: user Information must be an object"
+                    ]);
+                    exit;
+                }
+
+                $userId = mysqli_real_escape_string($conn, $data['userInfo']['userId']);
+                $fname = mysqli_real_escape_string($conn, $data['userInfo']['fName']);
+                $lname = mysqli_real_escape_string($conn, $data['userInfo']['lName']);
+                $user = mysqli_real_escape_string($conn, $data['userInfo']['userName']);
+                $role = mysqli_real_escape_string($conn, $data['userInfo']['role']);
+
+                if ($userId == '' || $fname == '' || $lname == '' || $user == '' || $user == '' || $role == '') {
+                    echo json_encode([
+                        "status" => 404,
+                        "message" => "Please provide user Information in json formate!"
+                    ]);
+                    exit;
+                }
+
+                $sql1 = "SELECT username FROM user WHERE username = '{$user}' AND user_id != {$userId}";
+
+                $result = mysqli_query($conn, $sql1);
+
+                if (mysqli_num_rows($result) > 0) {
+                    echo json_encode([
+                        "status" => 409,
+                        "message" => "User name already Exist!"
+                    ]);
+                    exit;
+                } else {
+
+                    $sql2 = "update user set first_name= '{$fname}', last_name= '{$lname}', username='{$user}', role='{$role}' where user_id='{$userId}'";
+
+                    if (mysqli_query($conn, $sql2)) {
+                        echo json_encode([
+                            "status" => 200,
+                            "message" => "User Updated Successfully!"
+                        ]);
+                    } else {
+                        echo json_encode([
+                            "status" => 500,
+                            "message" => "Server error!"
+                        ]);
+                    }
+                }
+            } else {
+                echo json_encode([
+                    "status" => 500,
+                    "message" => "Please provide User Information!"
+                ]);
+            }
+            break;
+        case "delete_user": // Delete Users start
             if ($action == "delete_user") {
                 if (!isset($data["userId"]) || empty($data["userId"])) {
                     echo json_encode([
@@ -99,8 +181,8 @@ if (!isset($data["action"]) || empty($data["action"])) {
                     ]);
                 } else {
                     echo json_encode([
-                        "status" => 404,
-                        "message" => "User not deleted Successfully!"
+                        "status" => 500,
+                        "message" => "Server error!"
                     ]);
                 }
             }
@@ -108,7 +190,7 @@ if (!isset($data["action"]) || empty($data["action"])) {
             break;
 
         case "get_users":    // Get Users start
-            $page_limit = 2;
+            $page_limit = 10;
 
             if (isset($data['page'])) {
                 $page = $data['page'];

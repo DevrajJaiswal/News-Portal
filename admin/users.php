@@ -44,27 +44,31 @@ if ($_SESSION['role'] == 0) {
                 <!-- Form Start -->
                 <form action="" method="POST" id="userForm" autocomplete="off">
                     <div class="form-group">
-                        <label>First Name</label>
+                        <input type="hidden" name="user_id" id="userId" class="form-control" value=""
+                            placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="fname">First Name</label>
                         <input type="text" name="fname" id="fname" class="form-control" placeholder="First Name"
                             required>
                     </div>
                     <div class="form-group">
-                        <label>Last Name</label>
+                        <label for="lname">Last Name</label>
                         <input type="text" name="lname" id="lname" class="form-control" placeholder="Last Name"
                             required>
                     </div>
                     <div class="form-group">
-                        <label>User Name</label>
+                        <label for="user">User Name</label>
                         <input type="text" name="user" id="user" class="form-control" placeholder="Username" required>
                     </div>
 
                     <div class="form-group">
-                        <label>Password</label>
+                        <label for="password">Password</label>
                         <input type="password" name="password" id="password" class="form-control" placeholder="Password"
                             required>
                     </div>
                     <div class="form-group">
-                        <label>User Role</label>
+                        <label for="role">User Role</label>
                         <select class="form-control" name="role" id="role">
                             <option value="0">Normal User</option>
                             <option value="1">Admin</option>

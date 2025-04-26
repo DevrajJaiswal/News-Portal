@@ -1,8 +1,6 @@
 $(document).ready(function () {
 
     // Fetch Users code start 
-
-    console.log("Users")
     function loadUsers(pageNo = 1) {
         const newURL = `?page=${pageNo}`;
         history.pushState({}, '', newURL);
@@ -42,7 +40,6 @@ $(document).ready(function () {
                                 </tr>`;
                         serialNo++;
                     });
-
                     $(".content-table tbody").html(allUser);
 
 
@@ -88,7 +85,6 @@ $(document).ready(function () {
     loadUsers();
     // Fetch Users code end 
 
-
     // Navigate page code start 
     $(document).on('click', ".navigate span", (function () {
         let pageNo = $(this).data("page");
@@ -99,23 +95,25 @@ $(document).ready(function () {
 
     // Add user code start 
     $(".add-new").click(function () {
-        // console.log("Model form visible")
-        $("#modelForm").show()
+        $("#password").parent(".form-group").show();
+        $("#saveButton").val("Save")
+        $("#modelForm").show();
+        saveType = "add_user";
     })
 
     $("#closeModelForm").click(function () {
-        // console.log("Model form hide")
+        $("#userForm")[0].reset();
         $("#modelForm").hide()
     })
 
-    function formValidation() {
+    function formValidation(saveType) {
         console.clear()
         error = [];
         isValidated = true;
         userInfo = {}
 
         fName = $("#fname").val().trim()
-        console.log(fName)
+        // console.log(fName)
         if (fName === '') {
             error.push("First Name is blank");
             isValidated = false;
@@ -124,7 +122,7 @@ $(document).ready(function () {
         }
 
         lName = $("#lname").val().trim()
-        console.log(lName)
+        // console.log(lName)
         if (lName === '') {
             error.push("Last Name is blank");
             isValidated = false;
@@ -133,7 +131,7 @@ $(document).ready(function () {
         }
 
         userName = $("#user").val().trim()
-        console.log(userName)
+        // console.log(userName)
         if (userName === '') {
             error.push("User Name is blank");
             isValidated = false;
@@ -141,63 +139,127 @@ $(document).ready(function () {
             userInfo.userName = userName;
         }
 
-        password = $("#password").val().trim()
-        console.log(password)
-        if (password == '') {
-            error.push("Password is blank");
-            isValidated = false;
+        if (saveType == "update_user") {
+            userId = parseInt($("#userId").val().trim())
+            userInfo.userId = userId;
         } else {
-            userInfo.password = password;
+            password = $("#password").val().trim()
+            // console.log(password)
+
+            if (password == '') {
+                error.push("Password is blank");
+                isValidated = false;
+            } else {
+                userInfo.password = password;
+            }
         }
 
         role = parseInt($("#role").val().trim())
-        console.log(role)
-        console.log(typeof (role))
+        // console.log(role)
+
         if (role === '') {
             error.push("Role is blank");
             isValidated = false;
         } else {
             userInfo.role = role;
         }
+        // console.log(userInfo)
+
         return isValidated;
     }
+    // Add user code end 
+
+
+    // Edit user code start 
+    $(document).on('click', ".edit span", (function () {
+        let userId = $(this).data("id");
+        saveType = "update_user";
+
+        $("#saveButton").val("Update")
+        $("#password").parent(".form-group").hide()
+        $("#modelForm").show()
+
+        $.ajax({
+            "url": "http://localhost/News_Portal/api/user.php",
+            "type": "POST",
+            "data": JSON.stringify({
+                action: "edit_user", userId: userId
+            }),
+            "contentType": "application/json",
+            "dataType": "json",
+            "success": function (res) {
+                // console.log(res)
+                if (res.status === 200) {
+                    console.log(res.message)
+                    user = res.user;
+                    userId = user.user_id;
+                    fName = user.first_name;
+                    lName = user.last_name;
+                    userName = user.username;
+                    role = user.role;
+
+                    $("#userId").val(userId); // hidden input
+                    $("#fname").val(fName);
+                    $("#lname").val(lName);
+                    $("#user").val(userName);
+                    $("#role").val(role);
+                    $("#saveButton").val("Update");
+                } else {
+                    console.log(res.message)
+                }
+            },
+            "error": function (error) {
+                console.log(error);
+            }
+        })
+    }))
+    // Edit user code end 
+
+
+    // Save user start 
+    $("#userForm").on('keypress', function (e) {
+        if (e.which === 13) {
+            e.preventDefault();
+            $("#saveButton").click();
+        }
+    });
+
 
     $("#saveButton").click(function (e) {
         e.preventDefault()
-        console.log("Save Button clicked")
+        // console.log("Save Button clicked");
+        // console.log(saveType);
 
-        if (formValidation()) {
+        if (formValidation(saveType)) {
             $.ajax({
                 "url": "http://localhost/News_Portal/api/user.php",
                 "type": "POST",
                 "data": JSON.stringify({
-                    action: "add_user", userInfo: userInfo
+                    action: saveType, userInfo: userInfo
                 }),
                 "contentType": "application/json",
                 "dataType": "json",
                 "success": function (res) {
-                    // console.log(res)
-                    if (res.status === 200) {
-                        console.log(res["added user"])
-
+                    console.log(res);
+                    if (res.status === 200 || res.status === 201) {
                         $("#userForm")[0].reset();
                         $("#modelForm").hide()
                         loadUsers();
                     } else {
-                        console.log(res.message)
+                        console.log(res.message);
                     }
                 },
                 "error": function (error) {
                     console.log(error);
                 }
             })
-            console.log(isValidated)
+            // console.log(isValidated)
         } else {
             alert("All fields are required!");
             console.log(error);
         }
     })
-    // Add user code end 
+    // Save user end 
 
 
     // Delete user code start 
@@ -227,7 +289,6 @@ $(document).ready(function () {
         })
     }))
     // Delete user code end 
-
 
 })
 
