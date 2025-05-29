@@ -15,15 +15,16 @@ if ($_SESSION['role'] == 0) {
             </div>
             <div class="col-md-12">
                 <?php
-                $page_limit = 5;
+                $page_limit = 2;
 
                 if (isset($_GET['page'])) {
                     $page = $_GET['page'];
                 } else {
                     $page = 1;
                 }
+
                 $offset = ($page - 1) * $page_limit;
-                $sql = "select * from user order by user_id desc limit {$offset},{$page_limit}";
+                $sql = "select user_id, first_name, last_name, username, role from user order by user_id desc limit {$offset},{$page_limit}";
                 $result = mysqli_query($conn, $sql)  or die('query failed');
 
                 if (mysqli_num_rows($result) > 0) {

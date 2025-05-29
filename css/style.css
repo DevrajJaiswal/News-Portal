@@ -56,6 +56,7 @@ img.logo{
     font-weight: 600;
     text-transform: uppercase;
     display: inline-block;
+    cursor: pointer;
 }
 
 #header-admin .admin-logout:hover{
@@ -254,9 +255,6 @@ form{
 }
 #main-content .post-content .post-img:hover{
   border: 3px solid #1e90ff;
-}
-#main-content .post-content .inner-content{
-    /* border: 1px solid #000; */
 }
 
 #main-content .post-content h3{
